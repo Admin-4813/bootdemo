@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.Mapper.EmpMapper">
+
+    <resultMap id="dataBaseResultMap" type="com.example.demo.po.Emp">
+        <id property="eid" column="eid"></id>
+        <result property="ename" column="ename"></result>
+        <result property="sex" column="sex"></result>
+        <association property="dept" javaType="com.example.demo.po.Dept">
+            <id property="deptno" column="deptno"></id>
+            <result property="name" column="name"></result>
+            <result property="loc" column="loc"></result>
+        </association>
+    </resultMap>
+
+    <select id="emplist" resultMap="dataBaseResultMap">
+
+        SELECT * FROM emp inner join dept on emp.deptno=dept.deptno
+
+    </select>
+
+    <select id="deptlist" resultType="com.example.demo.po.Dept">
+
+        SELECT * FROM dept
+
+    </select>
+
+    <insert id="save" parameterType="com.example.demo.po.Emp">
+        insert into emp(ename,deptno,sex) values (#{ename},#{dept.deptno},#{sex})
+    </insert>
+    <update id="updates" parameterType="com.example.demo.po.Emp">
+        update emp set ename=#{ename},sex=#{sex},deptno=#{dept.deptno} where eid=#{eid}
+    </update>
+
+</mapper>

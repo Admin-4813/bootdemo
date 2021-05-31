@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>员工编号</td>
+        <td>员工姓名</td>
+        <td>性别</td>
+        <td>部门</td>
+    </tr>
+    <tr th:each="emp,empindex: ${msg}">
+        <td th:text="${emp.eid}"></td>
+        <td th:text="${emp.ename}"></td>
+        <td th:text="${emp.sex}"></td>
+        <td th:text="${emp.dept.name}"></td>
+    </tr>
+
+</table>
+<hr>
+<h1>添加</h1>
+<form action="depts" method="post">
+   姓名 <input name="ename"><br>
+    部门<select name="dept.deptno">
+    <option name="dept.deptno" value="3">请选择部门</option>
+    <option th:each="emp,empindexs:${deptlist}" th:name="emp.deptno" th:value="${emp.deptno}" th:text="${emp.name}" ></option>
+</select><br>
+    性别<input name="sex"><br>
+    <input type="submit" value="save" />
+</form>
+
+
+<h1>修改</h1>
+<form action="depts" method="post">
+  <input type="hidden" name="_method" value="put">
+    员工编号 <select name="eid">
+            <option name="emp.eid" value="4">请选择员工编号</option>
+            <option th:each="emps,empindexs:${msg}" th:name="eid" th:value="${emps.eid}" th:text="${emps.eid}"></option>
+        </select>
+    姓名 <input name="ename"><br>
+    部门<select name="dept.deptno">
+    <option name="dept.deptno" value="3">请选择部门</option>
+    <option th:each="dept,deptindexs:${deptlist}" th:name="dept.deptno" th:value="${dept.deptno}" th:text="${dept.name}" ></option>
+</select><br>
+    性别<input name="sex"><br>
+    <input type="submit" value="update" />
+</form>
+
+<h1>删除</h1>
+
+</body>
+</html>

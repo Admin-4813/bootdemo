@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+
+    <tr th:each="dept,deptindex: ${list}">
+        <td th:text="${deptindex.index}"></td>
+        <td th:text="${dept.id}"></td>
+        <td th:text="${dept.name}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
