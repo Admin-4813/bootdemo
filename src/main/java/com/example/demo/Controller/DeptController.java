@@ -19,6 +19,7 @@ public class DeptController {
     EmpMapper empMapper;
     @GetMapping("/depts")
     public String queryAll(Model model){
+        System.out.println("update");
         List<Emp> list = empMapper.emplist();
         List<Dept> deptlist = empMapper.deptlist();
         model.addAttribute("msg",list);
